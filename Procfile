@@ -1,1 +1,1 @@
-web: java  -cp target/classes:target/dependency/* co.edu.escuelaing.sparkd.MicroSprint
+web: java -cp target/classes:target/dependency/* co.edu.escuelaing.sparkd.MicroSprint.MicroSpringBoot
