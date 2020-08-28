@@ -4,6 +4,7 @@ import java.net.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class HttpServer {
 			ServerSocket serverSocket = null;
 
 			try {
-				serverSocket = new ServerSocket(port);
+				serverSocket = new ServerSocket(getPort());
 			} catch (IOException e) {
 				System.err.println("Could not listen on port: " + port);
 				System.exit(1);
@@ -87,13 +88,15 @@ public class HttpServer {
 				break;
 			}
 		}
-		Request req = new Request(request.get("requestLine"));
+		if(request.get("requestLine") != null) {
+			Request req = new Request(request.get("requestLine"));
 
-		System.out.println("RequestLine: " + req);
+			System.out.println("RequestLine: " + req);
 
-		createResponse(req, new PrintWriter(
-				clientSocket.getOutputStream(), true));
-		in.close();
+			createResponse(req, new PrintWriter(
+					clientSocket.getOutputStream(), true));
+			in.close();
+		}
 	}
 
 	private String[] createEntry(String rawEntry) {
@@ -138,7 +141,7 @@ public class HttpServer {
 	}
 
 	private void getStaticResource(String path, PrintWriter out) {
-		Path file = Path.of("target/classes/public_html" + path);
+		Path file = Paths.get("target/classes/public_html" + path);
 		try (InputStream in = Files.newInputStream(file);
 				BufferedReader reader
 				= new BufferedReader(new InputStreamReader(in))) {
@@ -154,5 +157,11 @@ public class HttpServer {
 		} catch (IOException ex) {
 			Logger.getLogger(HttpServer.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+	private static int getPort() {
+		if (System.getenv("PORT") != null) {
+			return Integer.parseInt(System.getenv("PORT"));
+		}
+		return 36000;
 	}
 }
