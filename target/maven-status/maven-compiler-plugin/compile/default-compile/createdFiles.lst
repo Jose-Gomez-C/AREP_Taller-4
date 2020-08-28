@@ -1,6 +1,10 @@
+co\edu\escuelaing\sparkd\MicroSprint\HelloContoller.class
 co\edu\escuelaing\sparkd\httpserver\Request.class
+co\edu\escuelaing\sparkd\MicroSprint\MicroSpring.class
 co\edu\escuelaing\sparkd\urlreader\URLReader.class
 co\edu\escuelaing\sparkd\urlreader\URLScanner.class
+co\edu\escuelaing\sparkd\MicroSprint\MicroSpringBoot.class
 co\edu\escuelaing\sparkd\SparkD\SparkD.class
+co\edu\escuelaing\sparkd\MicroSprint\RequestMapping.class
 co\edu\escuelaing\sparkd\httpserver\HttpServer.class
 co\edu\escuelaing\sparkd\SparkD\SparkDServer.class
